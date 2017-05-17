@@ -12,14 +12,12 @@ var Queue = function() {
   };
 
   someInstance.dequeue = function() {
-    if (someInstance.size() > 0) {
-      const removed = storage[0];
-      for (let key in storage) {
-        storage[key] = storage[parseInt(key) + 1];
-      }
-      delete storage[someInstance.size() - 1];
-      return removed;
+    const removed = storage[0];
+    for (let key in storage) {
+      storage[key] = storage[parseInt(key) + 1];
     }
+    delete storage[someInstance.size() - 1];
+    return removed;  
   };
 
   someInstance.size = function() {
