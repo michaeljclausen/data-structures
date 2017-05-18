@@ -4,8 +4,17 @@ describe('binarySearchTree', function() {
   beforeEach(function() {
     binarySearchTree = BinarySearchTree(5);
   });
+  
+  it('should have correct initial value', function() {
+    expect(binarySearchTree.value).to.equal(5);   
+  });
+    
+  it('should insert a child', function() {
+    binarySearchTree.insert(1);
+    expect(binarySearchTree.left.value).to.equal(1);   
+  });
 
-  it('should have methods named "insert", "contains", and "depthFirstLog', function() {
+  it('should have methods named "insert", "contains", and "depthFirstLog"', function() {
     expect(binarySearchTree.insert).to.be.a('function');
     expect(binarySearchTree.contains).to.be.a('function');
     expect(binarySearchTree.depthFirstLog).to.be.a('function');
