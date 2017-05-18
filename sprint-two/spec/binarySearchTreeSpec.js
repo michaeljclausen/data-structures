@@ -29,11 +29,24 @@ describe('binarySearchTree', function() {
     expect(binarySearchTree.right.left.value).to.equal(6);
   });
 
+  it('should have working contains when there is only one node', function() {
+    expect(binarySearchTree.contains(5)).to.equal(true);
+    expect(binarySearchTree.contains(7)).to.equal(false);
+  });
+
   it('should have a working "contains" method', function() {
     binarySearchTree.insert(2);
     binarySearchTree.insert(3);
     binarySearchTree.insert(7);
     expect(binarySearchTree.contains(7)).to.equal(true);
+    expect(binarySearchTree.contains(8)).to.equal(false);
+  });
+  
+  it('should have a working "contains" method for single branched tree', function() {
+    binarySearchTree.insert(1);
+    binarySearchTree.insert(3);
+    binarySearchTree.insert(2);
+    expect(binarySearchTree.contains(2)).to.equal(true);
     expect(binarySearchTree.contains(8)).to.equal(false);
   });
 
