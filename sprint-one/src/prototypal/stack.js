@@ -1,6 +1,4 @@
 var Stack = function() {
-  // Hey! Rewrite in the new style. Your code will wind up looking very similar,
-  // but try not not reference your old code in writing the new style.
   var someInstance = Object.create(stackMethods);
   someInstance.storage = {};
   return someInstance;
@@ -8,11 +6,7 @@ var Stack = function() {
 
 var stackMethods = {
   size: function() {
-    let count = 0;
-    for (let key in this.storage) {
-      count++;
-    }
-    return count;
+    return Object.keys(this.storage).length;
   },
   push: function(value) {
     this.storage[this.size()] = value;

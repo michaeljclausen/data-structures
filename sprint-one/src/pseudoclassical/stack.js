@@ -5,11 +5,7 @@ var Stack = function() {
 };
 
 Stack.prototype.size = function() {
-  var count = 0;
-  for (let key in this.storage) {
-    count++;
-  }
-  return count;
+  return Object.keys(this.storage).length;
 };
 
 Stack.prototype.push = function(value) {

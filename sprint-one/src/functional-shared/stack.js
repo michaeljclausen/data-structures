@@ -15,11 +15,7 @@ var Stack = function() {
 
 var stackMethods = {
   size: function() {
-    let count = 0;
-    for (let key in this.storage) {
-      count++;
-    }
-    return count;
+    return Object.keys(this.storage).length;
   },
   
   pop: function() {
