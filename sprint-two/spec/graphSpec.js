@@ -44,6 +44,21 @@ describe('graph', function() {
     graph.removeEdge(5, 4);
     expect(graph.hasEdge(4, 5)).to.equal(false);
   });
+  
+  it('should not remove edge that does not already exist', function() {
+    graph.addNode(4);
+    graph.addNode(5);
+    expect(graph.hasEdge(4, 5)).to.equal(false);
+    graph.removeEdge(4, 5);
+  });
+  
+  it('should not remove node that does not already exist', function() {
+    graph.addNode(4);
+    graph.addNode(5);
+    expect(graph.contains(6)).to.equal(false);
+    graph.removeNode(6);
+    expect(graph.contains(6)).to.equal(false);
+  });
 
   it('should remove edges between nodes when a node is removed', function() {
     graph.addNode(4);

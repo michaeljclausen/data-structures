@@ -17,11 +17,24 @@ describe('set', function() {
     expect(set.contains('Danny Glover')).to.equal(true);
     expect(set.contains('Susan Sarandon')).to.equal(true);
   });
+  
+  it('should not add duplicate values to a set', function() {
+    set.add('Susan Sarandon');
+    set.add('Susan Sarandon');
+    expect(set.contains('Susan Sarandon')).to.equal(true);
+    expect(set._storage.length).to.equal(1);
+  });
 
   it('should remove values from a set', function() {
     set.add('Mel Gibson');
     set.remove('Mel Gibson');
     expect(set.contains('Mel Gibson')).to.equal(false);
+  });
+  
+  it('should do nothing if .remove is called with a value not present in the set', function() {
+    set.add('Mel Gibson');
+    set.remove('Pam Gibson');
+    expect(set.contains('Mel Gibson')).to.equal(true);
   });
 
 });
