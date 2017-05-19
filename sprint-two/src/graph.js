@@ -87,11 +87,18 @@ Graph.prototype.removeEdge = function(fromNode, toNode) {
 
 // Pass in a callback which will be executed on each node of the graph.
 Graph.prototype.forEachNode = function(cb) {
-  this.nodeList.forEach(cb);
+  this.nodeList.forEach(node => cb(node.value));
 };
 
 /*
  * Complexity: What is the time complexity of the above functions?
+  .addNode is constant time 
+  .contains is linear given n = number of nodes
+  .removeNode is O(n^2) given n = number of nodes
+  .hasEdge is linear given n = number of edges
+  .addEdge is constant
+  .removeEdge is linear given n = number of edges
+  .forEachNode is linear given n = number of nodes
  */
 
 
