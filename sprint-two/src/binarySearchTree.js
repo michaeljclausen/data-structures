@@ -12,18 +12,10 @@ var BSTreeMethods = {
     
     if (value < this.value) {
       // let it become left child of something
-      if (this.left) {
-        this.left.insert(value);
-      } else {
-        this.left = newChild;
-      }
+      this.left ? this.left.insert(value) : this.left = newChild;
     } else {
       // let it become right child of something
-      if (this.right) {
-        this.right.insert(value);
-      } else {
-        this.right = newChild;
-      }
+      this.right ? this.right.insert(value) : this.right = newChild;
     }
     
   },
@@ -59,20 +51,7 @@ var BSTreeMethods = {
       
       
       
-  
-      
-  //     // if there is a left child, search that whole tree
-  //     if (this.left) {
-  //       foundInLeftChild = this.left.contains(value);
-  //     } 
-  //     // if there is a right child, search that whole tree
-  //     if (this.right) {
-  //       foundInRightChild = this.right.contains(value);
-  //     } 
-  //     foundValue = foundInLeftChild || foundInRightChild;
-  //   }
-  //   return foundValue;
-  // },
+
 
   depthFirstLog: function(callback) {
     callback(this.value);
@@ -89,4 +68,7 @@ var BSTreeMethods = {
 
 /*
  * Complexity: What is the time complexity of the above functions?
+ .contains n
+ .depthFirstLog n
+ .insert n
  */

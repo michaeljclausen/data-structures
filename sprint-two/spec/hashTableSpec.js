@@ -73,6 +73,7 @@ describe('hashTable', function() {
       hashTable.insert(firstName, lastName);
       expect(hashTable.retrieve(firstName)).to.equal(lastName);
     });
+    debugger;
     expect(hashTable._limit).to.equal(16);
   });
 
