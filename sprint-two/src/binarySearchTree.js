@@ -48,10 +48,6 @@ var BSTreeMethods = {
     }
     return foundValue;
   },
-      
-      
-      
-
 
   depthFirstLog: function(callback) {
     callback(this.value);
@@ -61,7 +57,25 @@ var BSTreeMethods = {
     if (this.right) {
       this.right.depthFirstLog(callback);
     }
+  },
+
+  breadthFirstLog: function(callback) {
+    let queue = [this];
+    let n;
+
+    while (queue.length > 0) {
+      n = queue.pop();
+      callback(n.value);
+
+      if (n.left) {
+        queue.unshift(n.left);
+      }
+      if (n.right) {
+        queue.unshift(n.right);
+      }
+    }
   }
+
 };
 
 
