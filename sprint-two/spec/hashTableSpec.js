@@ -78,7 +78,6 @@ describe('hashTable', function() {
   });
 
   it('should halve in size when needed', function() {
-    debugger;
     _.each(people, function(person) {
       var firstName = person[0];
       var lastName = person[1];

@@ -6,7 +6,6 @@ var HashTable = function(size = 8) {
 };
 
 HashTable.prototype.checkSize = function() {
-debugger;
   // if numStored > 3/4 * limit, double storage
   if (this._numStored >= 3 / 4 * this._limit) {
     this.doubleTable();
@@ -19,12 +18,10 @@ debugger;
 };
 
 HashTable.prototype.doubleTable = function() {
-  debugger;
-  console.log('doubling');
   let largerHashTable = new HashTable();
   
   largerHashTable._limit = this._limit * 2;
-  largerHashTable._storage = LimitedArray(this._limit * 2);
+  largerHashTable._storage = LimitedArray(largerHashTable._limit);
 
   this.traverse(largerHashTable.tempTableInsert.bind(largerHashTable));
   this._limit = largerHashTable._limit;  
@@ -34,11 +31,10 @@ HashTable.prototype.doubleTable = function() {
 };
 
 HashTable.prototype.halveTable = function() {
-  console.log('halving');
   let smallerHashTable = new HashTable();
 
   smallerHashTable._limit = Math.ceil(this._limit / 2);
-  smallerHashTable._storage = LimitedArray(Math.ceil(this._limit / 2));
+  smallerHashTable._storage = LimitedArray(Math.ceil(smallerHashTable._limit));
 
   
   this.traverse(smallerHashTable.tempTableInsert.bind(smallerHashTable));
@@ -84,7 +80,6 @@ HashTable.prototype.tempTableInsert = function(k, v) {
 
 HashTable.prototype.insert = function(k, v) {
   this.checkSize();
-  console.log('inserting', k, v);
   
   var index = getIndexBelowMaxForKey(k, this._limit);
 
@@ -126,7 +121,6 @@ HashTable.prototype.retrieve = function(k) {
 
 HashTable.prototype.remove = function(k) {
   this.checkSize();
-  console.log('removing', k);
   var index = getIndexBelowMaxForKey(k, this._limit);
   
   const bucket = this._storage.get(index);
