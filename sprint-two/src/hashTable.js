@@ -2,29 +2,52 @@ var HashTable = function() {
   this._limit = 8;
   this._storage = LimitedArray(this._limit);
   this._numStored = 0;
+
 };
 
 HashTable.prototype.checkSize = function() {
+
   // if numStored > 3/4 * limit, double storage
   if (this._numStored > 3 / 4 * this._limit) {
     this.doubleTable();
   }
   // if numStored < 1/4 * limit, halve storage
   if (this._numStored < 1 / 4 * this._limit) {
-    this.halveTable();
+    //this.halveTable();
   }
+  
 };
 
 HashTable.prototype.doubleTable = function() {
-  debugger;
+  
+  console.log('doubling');
   let largerHashTable = new HashTable();
+  
   largerHashTable._limit = this._limit * 2;
-  this.traverse(largerHashTable.insert);
-  //this = largerHashTable;
+  largerHashTable._storage = LimitedArray(this._limit * 2);
+
+  this.traverse(largerHashTable.insert.bind(largerHashTable));
+  
+  this._limit = largerHashTable._limit;  
+  this._storage = largerHashTable._storage;
+  this._numStored = largerHashTable._numStored;
+
 };
 
 HashTable.prototype.halveTable = function() {
-  this._limit = Math.floor(this._limit / 2);
+  console.log('halving');
+  let smallerHashTable = new HashTable();
+
+  smallerHashTable._limit = Math.ceil(this._limit / 2);
+  smallerHashTable._storage = LimitedArray(Math.ceil(this._limit / 2));
+
+  
+  this.traverse(smallerHashTable.insert.bind(smallerHashTable));
+  console.log(smallerHashTable._limit);
+  this._limit = smallerHashTable._limit;  
+  this._storage = smallerHashTable._storage;
+  this._numStored = smallerHashTable._numStored;
+
 };
 
 HashTable.prototype.traverse = function(cb) {
@@ -38,7 +61,8 @@ HashTable.prototype.traverse = function(cb) {
 };
 
 HashTable.prototype.insert = function(k, v) {
-  this.checkSize();
+  
+  console.log('inserting', k, v);
   
   var index = getIndexBelowMaxForKey(k, this._limit);
 
@@ -48,7 +72,8 @@ HashTable.prototype.insert = function(k, v) {
     let bucket = [];
     bucket.push([k, v]);
     this._storage.set(index, bucket);
-    this.numStored++;
+    this._numStored++;
+    this.checkSize();
   
   } else {
     // if we're overwriting  
@@ -61,6 +86,8 @@ HashTable.prototype.insert = function(k, v) {
     
     // if we're not overwriting
     bucketAtIndex.push([k, v]);
+    this._numStored++;
+    this.checkSize();
   }
   
 };
@@ -81,15 +108,15 @@ HashTable.prototype.retrieve = function(k) {
 };
 
 HashTable.prototype.remove = function(k) {
+  console.log('removing', k);
   var index = getIndexBelowMaxForKey(k, this._limit);
   
   const bucket = this._storage.get(index);
-  
   if (bucket) {  
     for (let i = 0; i < bucket.length; i++) {
       if (bucket[i][0] === k) {
         bucket.splice(i, 1);
-        this.numStored--;
+        this._numStored--;
       }
     }    
   }
