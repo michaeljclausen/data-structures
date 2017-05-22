@@ -1,10 +1,8 @@
 var Queue = function() {
   var someInstance = {};
   someInstance.storage = {};
-  
-  someInstance.size = queueMethods.size;
-  someInstance.enqueue = queueMethods.enqueue;
-  someInstance.dequeue = queueMethods.dequeue;
+
+  _.extend(someInstance, queueMethods);
   
   return someInstance;
 };
@@ -13,9 +11,11 @@ var queueMethods = {
   size: function() {
     return Object.keys(this.storage).length;
   },
+
   enqueue: function(value) {
-    this.storage[this.size()] = value;
+    this.storage[this.size()] = value.toString();
   },
+  
   dequeue: function() {
     const removed = this.storage[0];
     for (let key in this.storage) {
@@ -25,5 +25,3 @@ var queueMethods = {
     return removed;
   }
 };
-
-

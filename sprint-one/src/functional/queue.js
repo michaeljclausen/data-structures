@@ -3,7 +3,7 @@ var Queue = function() {
   var storage = {};
 
   someInstance.enqueue = function(value) { 
-    storage[someInstance.size()] = value;
+    storage[someInstance.size()] = value.toString();
   };
 
   someInstance.dequeue = function() {
@@ -18,6 +18,5 @@ var Queue = function() {
   someInstance.size = function() {
     return Object.keys(storage).length;
   };
-
   return someInstance;
 };

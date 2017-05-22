@@ -20,5 +20,3 @@ var queueMethods = {
     return removed;
   }
 };
-
-

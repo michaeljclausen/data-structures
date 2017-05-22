@@ -7,7 +7,7 @@ Queue.prototype.size = function() {
 };
 
 Queue.prototype.enqueue = function(value) {
-  this.storage[this.size()] = value;
+  this.storage[this.size()] = value.toString();
 };
 
 Queue.prototype.dequeue = function() {
