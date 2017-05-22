@@ -29,12 +29,31 @@ describe('set', function() {
     set.add('Mel Gibson');
     set.remove('Mel Gibson');
     expect(set.contains('Mel Gibson')).to.equal(false);
+
+    set.add(3);
+    set.remove(3);
+    expect(set.contains(3)).to.equal(false);
   });
   
   it('should do nothing if .remove is called with a value not present in the set', function() {
     set.add('Mel Gibson');
     set.remove('Pam Gibson');
     expect(set.contains('Mel Gibson')).to.equal(true);
+  });
+
+  it('should add number values to a set', function() {
+    set.add(4);
+    set.add(8.94);
+    expect(set.contains(4)).to.equal(true);
+    expect(set.contains(8.94)).to.equal(true);
+  });
+
+  it('should add objects of any kind to a set', function() {
+    let obj = { 1: 3, 2: 'paper' };
+    set.add(obj);
+    set.add(8.94);
+    expect(set.contains(obj)).to.equal(true);
+    expect(set.contains(8.94)).to.equal(true);
   });
 
 });
